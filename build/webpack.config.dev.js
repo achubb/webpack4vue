@@ -26,6 +26,11 @@ module.exports = {
                 loader: 'babel-loader'
             },
             {
+                test: /\.(js|vue)$/,
+                use: 'eslint-loader',
+                enforce: 'pre'
+            },
+            {
                 test: /\.styl(us)?$/,
                 use: [
                     MiniCssExtractPlugin.loader,
