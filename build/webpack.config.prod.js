@@ -4,9 +4,20 @@ const webpack = require('webpack')
 const { VueLoaderPlugin } = require('vue-loader')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const CleanWebpackPlugin = require('clean-webpack-plugin')
+const CopyWebpackPlugin = require('copy-webpack-plugin')
+const path = require('path')
+
+function resolve (dir) {
+    return path.join(__dirname, '..', dir)
+}
 
 module.exports = {
     mode: 'development',
+
+    output: {
+        filename: '[name].[hash].js'
+    },
 
     module: {
         rules: [
@@ -30,6 +41,9 @@ module.exports = {
     },
 
     plugins: [
+        new CleanWebpackPlugin('dist', {
+            root: process.cwd()
+        }),
         new VueLoaderPlugin(),
         new HtmlWebpackPlugin({
             filename: 'index.html',
@@ -37,7 +51,12 @@ module.exports = {
             inject: true
         }),
         new MiniCssExtractPlugin({
-            filename: 'main.css'
-        })
+            filename: 'main.[hash].css'
+        }),
+        new CopyWebpackPlugin([{
+            from: resolve('static/img'),
+            to: resolve('dist/img'),
+            toType: 'dir'
+        }])
     ]
 }
