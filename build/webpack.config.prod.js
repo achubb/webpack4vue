@@ -38,7 +38,7 @@ module.exports = {
                 ]
             },
             {
-                test: /\.(gif|png|jpe?g|svg)$/i,
+                test: /\.(gif|png|jpe?g|svg)$/,
                 use: [
                     'file-loader?name=[path][name].[ext]',
                     {
@@ -48,6 +48,18 @@ module.exports = {
                         }
                     }
                 ],
+            },
+            {
+                test: /\.(woff(2)?|ttf|eot|otf)(\?v=\d+\.\d+\.\d+)?$/,
+                use: [
+                    {
+                        loader: 'file-loader',
+                        options: {
+                            name: './fonts/[name].[ext]',
+                            publicPath: '../'
+                        }
+                    }
+                ]
             }
         ]
     },
