@@ -47,7 +47,7 @@ module.exports = {
                     'css-loader',
                     'stylus-loader'
                 ]
-            }
+            },
         ]
     },
 

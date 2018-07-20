@@ -36,6 +36,18 @@ module.exports = {
                     'css-loader',
                     'stylus-loader'
                 ]
+            },
+            {
+                test: /\.(gif|png|jpe?g|svg)$/i,
+                use: [
+                    'file-loader?name=[path][name].[ext]',
+                    {
+                        loader: "image-webpack-loader",
+                        options: {
+                            bypassOnDebug: true
+                        }
+                    }
+                ],
             }
         ]
     },
@@ -52,11 +64,11 @@ module.exports = {
         }),
         new MiniCssExtractPlugin({
             filename: 'main.[hash].css'
-        }),
-        new CopyWebpackPlugin([{
-            from: resolve('static/img'),
-            to: resolve('dist/img'),
-            toType: 'dir'
-        }])
+        })
+        //new CopyWebpackPlugin([{
+            //from: resolve('static/img'),
+            //to: resolve('dist/img'),
+            //toType: 'dir'
+        //}])
     ]
 }
